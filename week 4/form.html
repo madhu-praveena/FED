@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Registration Form</title>
+  <style>
+
+    body{
+      background-color: antiquewhite;
+      font-size: large;
+      align-items: center;
+      text-align: center;
+      padding-top: 20px;
+    }
+    .error { border: 2px solid red; }
+    .error-message { color: red; font-size: 14px; }
+    .success { color: green; font-size: 14px; }
+  </style>
+</head>
+<body>
+  <h2>Registration Form</h2>
+  <form id="regForm">
+    <div class="form-group">
+      <label for="fullname">Full Name</label>
+      <input type="text" id="fullname" name="fullname">
+      <div id="fullnameError" class="error-message"></div>
+    </div>
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email">
+      <div id="emailError" class="error-message"></div>
+    </div>
+    <div class="form-group">
+      <label for="phone">Phone Number</label>
+      <input type="tel" id="phone" name="phone">
+      <div id="phoneError" class="error-message"></div>
+    </div>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password">
+      <div id="passwordError" class="error-message"></div>
+    </div>
+    <div class="form-group">
+      <button type="submit">Register</button>
+      <button type="reset">Clear</button>
+    </div>
+    <div id="successMessage" class="success"></div>
+  </form>
+
+  <script>
+    const form = document.getElementById('regForm');
+    const fullname = document.getElementById('fullname');
+    const email = document.getElementById('email');
+    const phone = document.getElementById('phone');
+    const password = document.getElementById('password');
+
+    const fullnameError = document.getElementById('fullnameError');
+    const emailError = document.getElementById('emailError');
+    const phoneError = document.getElementById('phoneError');
+    const passwordError = document.getElementById('passwordError');
+    const successMessage = document.getElementById('successMessage');
+
+    const emailRegex = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
+    const phoneRegex = /^[0-9]{10}$/;
+    const passwordRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*]).{8,}$/;
+
+    function validateFullname() {
+      if (!fullname.value.trim()) {
+        fullnameError.textContent = "Full Name is required.";
+        fullname.classList.add("error");
+        fullname.focus();
+        return false;
+      }
+      fullnameError.textContent = "";
+      fullname.classList.remove("error");
+      return true;
+    }
+
+    function validateEmail() {
+      if (!emailRegex.test(email.value.trim())) {
+        emailError.textContent = "Invalid email format.";
+        email.classList.add("error");
+        email.focus();
+        return false;
+      }
+      emailError.textContent = "";
+      email.classList.remove("error");
+      return true;
+    }
+
+    function validatePhone() {
+      if (!phoneRegex.test(phone.value.trim())) {
+        phoneError.textContent = "Phone must be 10 digits.";
+        phone.classList.add("error");
+        phone.focus();
+        return false;
+      }
+      phoneError.textContent = "";
+      phone.classList.remove("error");
+      return true;
+    }
+
+    function validatePassword() {
+      if (!passwordRegex.test(password.value)) {
+        passwordError.textContent = "Password must be 8+ chars, include a number & special char.";
+        password.classList.add("error");
+        password.focus();
+        return false;
+      }
+      passwordError.textContent = "";
+      password.classList.remove("error");
+      return true;
+    }
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      successMessage.textContent = "";
+
+      let valid = true;
+      if (!validateFullname()) valid = false;
+      if (!validateEmail()) valid = false;
+      if (!validatePhone()) valid = false;
+      if (!validatePassword()) valid = false;
+
+      if (valid) {
+        successMessage.textContent = "Registration Successful!";
+      }
+    });
+  </script>
+</body>
+</html>
