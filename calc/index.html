@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="calc">
+        <input type="text" id="display" disabled>
+
+        <div>
+            <button onclick="pressKey('7')">7</button>
+            <button onclick="pressKey('8')">8</button>
+            <button onclick="pressKey('9')">9</button>
+            <button class="op" onclick="pressKey('/')">/</button>
+        </div>
+
+        <div>
+            <button onclick="pressKey('4')">4</button>
+            <button onclick="pressKey('5')">5</button>
+            <button onclick="pressKey('6')">6</button>
+            <button class="op" onclick="pressKey('*')">*</button>
+        </div>
+
+        <div>
+            <button onclick="pressKey('1')">1</button>
+            <button onclick="pressKey('2')">2</button>
+            <button onclick="pressKey('3')">3</button>
+            <button class="op" onclick="pressKey('-')">-</button>
+        </div>
+
+        <div>
+            <button onclick="pressKey('0')">0</button>
+            <button onclick="pressKey('.')">.</button>
+            <button class="eq" onclick="calculate()">=</button>
+            <button class="op" onclick="pressKey('+')">+</button>
+        </div>
+
+        <button class="clear" onclick="clearDisplay()">CLEAR</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
